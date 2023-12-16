@@ -13,11 +13,7 @@ function classNames(...classes: any[]) {
 type Selected = "NewMeetup" | "Main" | "Meetups" | "SingleMeetup"
 
 function onLogout() {
-  const response = fetch('/api/users/logout') {
-    'headers': {
-      'jti': localStorage.getItem('accessToken');
-    }
-  }
+  localStorage.removeItem('accessToken')
 }
 
 export default function NavBar({ selected }: {selected: Selected}) {
@@ -160,6 +156,7 @@ export default function NavBar({ selected }: {selected: Selected}) {
                                 active ? 'bg-gray-100' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
                               )}
+                              onClick={(e) => onLogout()}
                             >
                               Sign out
                             </Link>
