@@ -83,16 +83,12 @@ def get_embed_map():
     return collection_dict
 
 def get_posts(post_ids):
-    #print(post_ids)
     posts = []
     for id in post_ids:
         doc = db.collection("listing").document(id)
-        #print(doc.get())
         if not doc:
-            #print("Doc recc not found?")
             continue
         posts.append(doc.get().to_dict())
-    #print(posts)
     return posts
 
 def get_post_map():
