@@ -10,14 +10,16 @@ function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-type Selected = "NewMeetup" | "Main" | "Meetups" | "SingleMeetup"
+type Selected = "NewMeetup" | "Main" | "Meetups" | "SingleMeetup" | "SingleProfile"
 
 function onLogout() {
-  const response = fetch('/api/users/logout') {
+  fetch('/api/users/logout', {
     'headers': {
-      'jti': localStorage.getItem('accessToken');
+      'Authorization': "Bearer " + localStorage.getItem('accessToken')
     }
-  }
+  }).then(() => {
+    console.log('asdf')
+  })
 }
 
 export default function NavBar({ selected }: {selected: Selected}) {
@@ -30,7 +32,7 @@ export default function NavBar({ selected }: {selected: Selected}) {
     return notSelectedClass
   }
   return (
-    <Disclosure as="nav" className="bg-white shadow">
+    <Disclosure as="nav" className="bg-white shadow z-0">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -51,12 +53,12 @@ export default function NavBar({ selected }: {selected: Selected}) {
                   <Link href={"/"}>
                     <img
                       className="block h-8 w-auto lg:hidden"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                      src="/images/buicon.png"
                       alt="Your Company"
                     />
                     <img
                       className="hidden h-8 w-auto lg:block"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                      src="/images/buicon.png"
                       alt="Your Company"
                     />
                   </Link>
@@ -79,7 +81,13 @@ export default function NavBar({ selected }: {selected: Selected}) {
                     href={"#"}
                     className={getSelectedClass("SingleMeetup")}
                   >
-                    Single Meetup
+                    Meetup
+                  </Link> : null}
+                  {selected == "SingleProfile" ? <Link
+                    href={"#"}
+                    className={getSelectedClass("SingleProfile")}
+                  >
+                    Profile
                   </Link> : null}
                 </div>
               </div>

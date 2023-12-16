@@ -1,4 +1,3 @@
-import fasttext.util
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
 from transformers import BertTokenizer, BertModel
