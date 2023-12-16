@@ -70,7 +70,7 @@ export default function Register() {
           <div>
             <img
               className='mx-auto h-10 w-auto'
-              src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
+              src='/images/buicon.png'
               alt='Your Company'
             />
             <h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
@@ -191,7 +191,7 @@ export default function Register() {
                   href='#'
                   className='font-semibold text-indigo-600 hover:text-indigo-500'
                 >
-                  Forgot password? FIXME
+                  Forgot password?
                 </a>
               </div>
             </div>
@@ -213,7 +213,7 @@ export default function Register() {
               href='#'
               className='font-semibold text-indigo-600 hover:text-indigo-500'
             >
-              Login CHANGEMENEXTLINK
+              Login
             </a>
           </p>
         </div>

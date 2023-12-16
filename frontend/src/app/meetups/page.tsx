@@ -5,11 +5,11 @@ import Image from "next/image";
 const posts = [
   {
     id: 1,
-    title: 'Boost your conversion rate',
+    title: 'QuHacks Dinner',
     description:
       'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.',
-    date: 'Mar 16, 2020',
-    datetime: '2020-03-16',
+    date: 'Dec 16, 2023',
+    datetime: '2023-12-16',
     imageUrl: "https://s3-media0.fl.yelpcdn.com/bphoto/55ytTjhnJ8ka0O4ccaV6aA/o.jpg",
     author: {
       id: 1,

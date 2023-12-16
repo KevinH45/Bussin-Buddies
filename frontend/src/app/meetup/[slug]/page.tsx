@@ -10,13 +10,13 @@ import { usePathname } from 'next/navigation';
 import Link from "next/link";
 import {PlusIcon} from "@heroicons/react/20/solid";
 
-const meetupSample =   {
+const meetupSample =     {
     id: 1,
-    title: 'Boost your conversion rate',
+    title: 'QuHacks Dinner',
     description:
       'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.',
-    date: 'Mar 16, 2020',
-    datetime: '2020-03-16',
+    date: 'Dec 16, 2023',
+    datetime: '2023-12-16',
     imageUrl: "https://s3-media0.fl.yelpcdn.com/bphoto/55ytTjhnJ8ka0O4ccaV6aA/o.jpg",
     author: {
       id: 1,
@@ -92,8 +92,8 @@ export default function Post() {
                   type="button"
                   className="inline-flex items-center gap-x-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                    Going to Go
-                    <PlusIcon className="-mr-0.5 h-5 w-5" aria-hidden="true" />
+                    Going
+                    {/*<PlusIcon className="-mr-0.5 h-5 w-5" aria-hidden="true" />*/}
                     <CheckCircleIcon className="-mr-0.5 h-5 w-5" aria-hidden="true" />
                 </button>
               </div>

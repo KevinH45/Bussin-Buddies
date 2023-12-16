@@ -13,6 +13,9 @@ function classNames(...classes: any[]) {
 type Selected = "NewMeetup" | "Main" | "Meetups" | "SingleMeetup" | "SingleProfile"
 
 function onLogout() {
+<<<<<<< HEAD
+  localStorage.removeItem('accessToken')
+=======
   fetch('/api/users/logout', {
     'headers': {
       'Authorization': "Bearer " + localStorage.getItem('accessToken')
@@ -20,6 +23,7 @@ function onLogout() {
   }).then(() => {
     console.log('asdf')
   })
+>>>>>>> fec42b757c971811b7375fdbbcddcd598ed37795
 }
 
 export default function NavBar({ selected }: {selected: Selected}) {
@@ -168,6 +172,7 @@ export default function NavBar({ selected }: {selected: Selected}) {
                                 active ? 'bg-gray-100' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
                               )}
+                              onClick={(e) => onLogout()}
                             >
                               Sign out
                             </Link>
