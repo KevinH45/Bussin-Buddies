@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import * as React from 'react';
 
 import '@/styles/colors.css';
+import NavBar from "@/components/NavBar";
 
 export const metadata: Metadata = {
   title: 'Components',
@@ -13,5 +14,8 @@ export default function ComponentsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className='content-center p-5'>{children}</div>;
+  return <div className='w-full h-full'>
+    <NavBar selected={"SingleMeetup"}/>
+    {children}
+  </div>;
 }
