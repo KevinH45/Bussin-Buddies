@@ -17,6 +17,7 @@
     "postbuild": "next-sitemap --config next-sitemap.config.js"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
     "clsx": "^2.0.0",
     "lucide-react": "^0.297.0",
     "next": "^14.0.4",
