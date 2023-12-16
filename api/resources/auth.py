@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from http import HTTPStatus
 from flask import request
-from utils.db_utils import get_user_from_username, verify_password
+from utils.db_utils import get_user_from_email, verify_password
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token, create_refresh_token, get_jwt
 
 jwt_blacklist = set()
@@ -17,7 +17,7 @@ class LoginResource(Resource):
         except KeyError:
             return  {"msg": "Username or password not provided."}, HTTPStatus.BAD_REQUEST
 
-        userDict, userObj = get_user_from_username(username)
+        userDict, userObj = get_user_from_email(username)
 
         if not userDict or not userObj:
             return {"msg": "Username or password is incorrect"}, HTTPStatus.UNAUTHORIZED
@@ -28,7 +28,7 @@ class LoginResource(Resource):
             refreshToken = create_refresh_token(identity=userObj.id)
             return {"accessToken": accessToken, "refreshToken": refreshToken, "userId": userObj.id}, HTTPStatus.OK
         else:
-            return {"msg":"Username or password is incorrect"}, HTTPStatus.UNAUTHORIZED
+            return {"msg": "Username or password is incorrect"}, HTTPStatus.UNAUTHORIZED
 
 
 class LogoutResource(Resource):
