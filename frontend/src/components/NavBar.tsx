@@ -12,6 +12,14 @@ function classNames(...classes: any[]) {
 
 type Selected = "NewMeetup" | "Main" | "Meetups" | "SingleMeetup"
 
+function onLogout() {
+  const response = fetch('/api/users/logout') {
+    'headers': {
+      'jti': localStorage.getItem('accessToken');
+    }
+  }
+}
+
 export default function NavBar({ selected }: {selected: Selected}) {
   const selectedClass = "inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900"
   const notSelectedClass = "inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
@@ -146,7 +154,7 @@ export default function NavBar({ selected }: {selected: Selected}) {
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
+                            <Link
                               href="#"
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
@@ -154,7 +162,7 @@ export default function NavBar({ selected }: {selected: Selected}) {
                               )}
                             >
                               Sign out
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                       </Menu.Items>
