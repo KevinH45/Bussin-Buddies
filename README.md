@@ -13,7 +13,7 @@ Then, they can view custom-recommended meetups (based on our LLM powered recomme
 
 ## Recommendation Engine
 
-![ML-Model](https://github.com/KevinH45/QuHacks/blob/main/ml_model.png)
+![ML-Model](https://github.com/KevinH45/QuHacks/blob/main/ml_model_bert.png)
 
 ## API Reference
 
