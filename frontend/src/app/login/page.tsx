@@ -55,7 +55,7 @@ export default function Login() {
           <div>
             <img
               className='mx-auto h-10 w-auto'
-              src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
+              src='/images/buicon.png'
               alt='Your Company'
             />
             <h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
@@ -64,7 +64,7 @@ export default function Login() {
           </div>
           <form className='space-y-6' action='#' method='POST'>
             <div className='relative -space-y-px rounded-md shadow-sm'>
-              <div className='pointer-events-none absolute inset-0 z-10 rounded-md ring-1 ring-inset ring-gray-300' />
+            <div className='pointer-events-none absolute inset-0 z-10 rounded-md ring-1 ring-inset ring-gray-300' />
               <div>
                 <label htmlFor='email-address' className='sr-only'>
                   Email address
@@ -141,7 +141,7 @@ export default function Login() {
               href='#'
               className='font-semibold text-indigo-600 hover:text-indigo-500'
             >
-              Register CHANGEME NEXT LINKN
+              Register
             </a>
           </p>
         </div>
