@@ -1,0 +1,71 @@
+POST create-user (it creates a user):
+
+{
+    bio (string)
+    age (int)
+    location (geo coord)
+    email (string)
+    username (string)
+    password (string)
+}
+=> {uid or error if username is taken}
+
+
+POST login (logs in):
+{
+    username
+    password
+}
+=> {
+    jwt_access
+    jwt_refresh
+}
+
+POST refresh (refreshes access token):{
+    jwt_refresh
+} => {
+    jwt_access
+}
+
+GET logout (logout):
+{
+    jwt_access_token (in header)
+}
+=> {return nothign}
+
+GET listings (returns a lsit of recommended listing){
+    jwt_access_token (in header)
+    location_filter_on (boolean)
+    cuisin_filter_on (boolean)
+}
+=> {
+    listings: [
+        listing-id: {
+            rest_link (string)
+            time (datetime)
+            cap (number)
+            image_link (string)
+            people (array of uids)
+        }
+    ]
+}
+
+POST listings (create a listing) {
+    jwt_access_token (in header)
+    rest_link (string)
+    time (datetime)
+    image_link (string)
+} => {
+    listing id
+}
+
+POST listings/{list-id} (join a listing) {
+    jwt_access_token
+} => if listing is full return error else return nothing
+
+GET user/{user-id} {
+     bio (string)
+    age (int)
+    location (geo coord)
+    username (string)
+}

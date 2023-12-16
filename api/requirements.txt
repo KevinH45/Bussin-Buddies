@@ -2,3 +2,4 @@ pandas
 numpy
 flask
 firebase-admin
+flask-restful
