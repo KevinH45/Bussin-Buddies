@@ -15,20 +15,10 @@ export default function Post() {
   const [postRestaurant, setRestaurant] = useState<string>();
   const [postLink, setLink] = useState<string>();
   const [postDetails, setDetails] = useState<string>();
+  
 
   const onSubmit = (e: any) => {
     e.preventDefault()
-    const info = JSON.stringify({
-      
-    })
-    console.log(postTitle, postRestaurant, postLink, postDetails, attenceCap)
-    const response = fetch("localhost:3000/api/listings", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: info,
-    });
   }
 
   return (
