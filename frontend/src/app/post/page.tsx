@@ -1,15 +1,36 @@
 'use client';
 
 import { PhotoIcon } from '@heroicons/react/24/solid';
-import {useState} from "react";
-import {days, months, years} from "@/components/picker/dates";
-import Date, {DDVal} from "@/components/picker/Date";
+import { useState } from "react";
+import { days, months, years } from "@/components/picker/dates";
+import Date, { DDVal } from "@/components/picker/Date";
 import * as React from "react";
 
 export default function Post() {
   const [dateDay, setDateDay] = useState<DDVal>(days[0]);
   const [dateMonth, setDateMonth] = useState<DDVal>(months[0]);
   const [dateYear, setDateYear] = useState<DDVal>(years[0]);
+  const [attenceCap, setAttendance] = useState<number>();
+  const [postTitle, setTitle] = useState<string>();
+  const [postRestaurant, setRestaurant] = useState<string>();
+  const [postLink, setLink] = useState<string>();
+  const [postDetails, setDetails] = useState<string>();
+
+  const onSubmit = (e: any) => {
+    e.preventDefault()
+    const info = JSON.stringify({
+      // email: user_email,
+      // password: user_password,
+    })
+    console.log(postTitle, postRestaurant, postLink, postDetails, attenceCap)
+    // const response = fetch("localhost:3000/api/users/login", {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: info,
+    // });
+  }
 
   return (
     <div className='items-center p-5'>
@@ -64,6 +85,8 @@ export default function Post() {
                       autoComplete='title'
                       className='block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
                       placeholder='Baltimore Linux User Group - Monthly Meeting'
+                      value={postTitle}
+                      onChange={(e) => setTitle(e.target.value)}
                     />
                   </div>
                 </div>
@@ -87,6 +110,8 @@ export default function Post() {
                       autoComplete='restaurant'
                       className='block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
                       placeholder='CLOCK Restoration - Baltimore'
+                      value={postRestaurant}
+                      onChange={(e) => setRestaurant(e.target.value)}
                     />
                   </div>
                 </div>
@@ -109,6 +134,8 @@ export default function Post() {
                       autoComplete='url'
                       className='block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
                       placeholder='https://www.yelp.com/biz/clock-restoration-baltimore'
+                      value={postLink}
+                      onChange={(e) => setLink(e.target.value)}
                     />
                   </div>
                 </div>
@@ -128,6 +155,8 @@ export default function Post() {
                     rows={3}
                     className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
                     defaultValue={''}
+                    value={postDetails}
+                    onChange={(e) => setDetails(e.target.value)}
                   />
                 </div>
                 <p className='mt-3 text-sm leading-6 text-gray-600'>
@@ -152,6 +181,8 @@ export default function Post() {
                       autoComplete='number'
                       className='block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
                       placeholder='5'
+                      value={attenceCap}
+                      onChange={(e) => setAttendance(parseInt(e.target.value))}
                     />
                   </div>
                 </div>
@@ -160,14 +191,17 @@ export default function Post() {
               <div className="col-span-2 col-start-4">
                 <div className=''>Date</div>
                 <Date dateDay={dateDay} dateMonth={dateMonth} dateYear={dateYear} setDateDay={setDateDay}
-                      setDateMonth={setDateMonth} setDateYear={setDateYear}/>
+                  setDateMonth={setDateMonth} setDateYear={setDateYear} />
               </div>
 
               {/* TODO: time */}
 
               <div className='col-span-2 col-start-5 content-end px-0'>
                 <button
-                  className='float-right rounded-full bg-green-500 px-4 py-2 text-sm font-bold text-gray-600 text-white hover:bg-blue-700'>
+                  className='float-right rounded-full bg-green-500 px-4 py-2 text-sm font-bold text-gray-600 text-white hover:bg-blue-700'
+                  type='submit'
+                  onClick={(e) => onSubmit(e)}
+                >
                   Bussin!
                 </button>
               </div>
