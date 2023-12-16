@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { usePathname } from 'next/navigation';
 import Link from "next/link";
 import {PlusIcon} from "@heroicons/react/20/solid";
+import {flag} from "arg";
 
 const meetupSample =     {
     id: 1,
@@ -33,12 +34,14 @@ export default function Post() {
   const [date, setDate] = useState<string>("Last");
   const [datetime, setDatetime] = useState<string>("...");
   const [imageUrl, setImageUrl] = useState<string>("...");
+  const [people, setPeople] = useState<string[]>([]);
   const [author, setAuthor] = useState<{id: number, name: string, imageUrl: string}>({id: 0, name: "N/A", imageUrl: ""});
   const badSlug = usePathname();
   const slug = badSlug.split("/")[badSlug.split("/").length - 1]
+  const [going, setGoing] = useState(false)
 
   useEffect(() => {
-    fetch("/api/users/" + slug)
+    fetch("http://localhost:5000/api/listings/" + slug)
       .then(response => {
         if (!response.ok) {
           setId(meetupSample.id)
@@ -52,15 +55,17 @@ export default function Post() {
         }
         return response.json();
       })
-      .then(data => {
+      .then((data: any) => {
+        console.log(data)
         setTitle(data.title)
         setDescription(data.description)
         setDate(data.date)
         setDatetime(data.datetime)
-        setImageUrl(data.imageUrl)
-        setAuthor(data.author)
+        setImageUrl("https://s3-media0.fl.yelpcdn.com/bphoto/55ytTjhnJ8ka0O4ccaV6aA/o.jpg")
+        setAuthor(data.author_descriptor)
+        setPeople(data.people)
       })
-  });
+  }, []);
 
   return (
     <div className='p-5 flex justify-center'>
@@ -90,18 +95,19 @@ export default function Post() {
               <div className="pt-8 w-full justify-center items-center flex">
                 <button
                   type="button"
+                  onClick={() => setGoing(!going)}
                   className="inline-flex items-center gap-x-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                    Going
-                    {/*<PlusIcon className="-mr-0.5 h-5 w-5" aria-hidden="true" />*/}
-                    <CheckCircleIcon className="-mr-0.5 h-5 w-5" aria-hidden="true" />
+                    {going ? "Going" : "Want to go"}
+                    {going ? <CheckCircleIcon className="-mr-0.5 h-5 w-5" aria-hidden="true" /> : <PlusIcon className="-mr-0.5 h-5 w-5" aria-hidden="true" />}
+
                 </button>
               </div>
               <div className="relative mt-8 flex items-center gap-x-4">
                 <img src={author.imageUrl} alt="" className="h-10 w-10 rounded-full bg-gray-50"/>
                 <div className="text-sm leading-6">
                   <p className="font-semibold text-gray-900">
-                    <Link href={`/profile/${author.id}`}>
+                    <Link href={`/profile/${people[0]}`}>
                       <span className="absolute inset-0"/>
                       {author.name}
                     </Link>

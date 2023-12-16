@@ -13,17 +13,15 @@ function classNames(...classes: any[]) {
 type Selected = "NewMeetup" | "Main" | "Meetups" | "SingleMeetup" | "SingleProfile"
 
 function onLogout() {
-<<<<<<< HEAD
-  localStorage.removeItem('accessToken')
-=======
-  fetch('/api/users/logout', {
+  fetch('http://localhost:5000/api/users/logout', {
     'headers': {
       'Authorization': "Bearer " + localStorage.getItem('accessToken')
     }
   }).then(() => {
     console.log('asdf')
+    localStorage.removeItem('accessToken')
+    window.location = "http://localhost:3000"
   })
->>>>>>> fec42b757c971811b7375fdbbcddcd598ed37795
 }
 
 export default function NavBar({ selected }: {selected: Selected}) {

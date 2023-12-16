@@ -34,19 +34,38 @@ export default function Post() {
   console.log(slug)
 
   useEffect(() => {
-    fetch("/api/users/" + slug)
+    fetch("http://localhost:5000/api/users/" + slug, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+      }
+    })
       .then(response => {
         if (!response.ok) {
           setFirstName(meetupSample.author.name)
           setBio(meetupSample.description)
-          setImage(meetupSample.author.imageUrl)
+          setImage("https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80")
         }
         return response.json();
       })
       .then(data => {
+        console.log(data)
         setFirstName(data.first_name)
         setLastName(data.last_name)
         setBio(data.bio)
+        setImage("https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80")
+      })
+    fetch("http://localhost:5000/api/users/" + slug + "/listings", {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        console.log(data)
       })
   });
 

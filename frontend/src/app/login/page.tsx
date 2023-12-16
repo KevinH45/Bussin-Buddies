@@ -3,6 +3,8 @@
 import Head from 'next/head';
 import * as React from 'react';
 import { useState } from 'react';
+import { redirect } from 'next/navigation'
+import {useRouter} from "next/router";
 
 function calculateAge(birthYear: number, birthMonth: number, birthDay: number): number {
   const currentDate = new Date();
@@ -22,6 +24,7 @@ function calculateAge(birthYear: number, birthMonth: number, birthDay: number): 
 export default function Login() {
   const [user_email, setEmail] = useState<string>("");
   const [user_password, setPassword] = useState<string>("");
+  // const { push } = useRouter();
 
   const onSubmit = (e: any) => {
     e.preventDefault()
@@ -30,7 +33,7 @@ export default function Login() {
         password: user_password,
       })
     console.log(info)
-    fetch("localhost:3000/api/users/login", {
+    fetch("http://localhost:5000/api/users/login", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -38,10 +41,12 @@ export default function Login() {
         body: info,
     }).then((resp) => {
       return resp.json();
-    }).then((e) => {
+    }).then((e: any) => {
+      console.log(e)
       localStorage.setItem('accessToken', e.accessToken);
       localStorage.setItem('refreshToken', e.refreshToken);
       localStorage.setItem('userId', e.userId);
+      window.location = "http://localhost:3000/meetups"
     });
   }
 
@@ -128,6 +133,14 @@ export default function Login() {
             <div>
               <button
                 type='submit'
+                onClick={(e) => {
+                  e.preventDefault()
+                  onSubmit(e)}
+                }
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  onSubmit(e)}
+                }
                 className='flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
               >
                 Sign in

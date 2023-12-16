@@ -52,10 +52,21 @@ const posts = [
 
 import Head from 'next/head';
 import * as React from 'react';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import Link from "next/link";
 
 export default function Meetups() {
+  const [meetups, setMeetups] = useState<any>()
+  useEffect(() => {
+    fetch("http://localhost:5000/api/listings", {
+      headers: {
+        'Authorization': "Bearer " + localStorage.getItem("accessToken")
+      }
+    }).then((e) => e.json()).then((v) => {
+      setMeetups(v)
+    })
+  }, [])
+  if (!meetups) return <p>Loading</p>
   return (
     <main>
       <div className="bg-white pb-20">
@@ -66,9 +77,9 @@ export default function Meetups() {
             {/*  Learn how to grow your business with our expert advice.*/}
             {/*</p>*/}
             <div className="space-y-16 sm:mt-4 sm:pt-4">
-              {posts.map((post) => (
+              {meetups.map((post) => (
                 <article key={post.id} className="flex max-w-xl flex-col items-start justify-between">
-                  <img src={post.imageUrl} className="py-3" alt="Restuarant Image" />
+                  <img src={"https://s3-media0.fl.yelpcdn.com/bphoto/55ytTjhnJ8ka0O4ccaV6aA/o.jpg"} className="py-3" alt="Restuarant Image" />
                   <div className="flex items-center gap-x-4 text-xs">
                     <time dateTime={post.datetime} className="text-gray-500 text-base">
                       {post.date}
@@ -90,12 +101,12 @@ export default function Meetups() {
                     <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{post.description}</p>
                   </div>
                   <div className="relative mt-8 flex items-center gap-x-4">
-                    <img src={post.author.imageUrl} alt="" className="h-10 w-10 rounded-full bg-gray-50" />
+                    <img src={post.author_descriptor.imageUrl} alt="" className="h-10 w-10 rounded-full bg-gray-50" />
                     <div className="text-sm leading-6">
                       <p className="font-semibold text-gray-900">
-                        <Link href={`/profile/${post.author.id}`}>
+                        <Link href={`/profile/${post.people[0]}`}>
                           <span className="absolute inset-0" />
-                          {post.author.name}
+                          {post.author_descriptor.name}
                         </Link>
                       </p>
                       {/*<p className="text-gray-600">{post.author.role}</p>*/}

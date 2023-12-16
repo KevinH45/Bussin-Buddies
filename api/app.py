@@ -7,6 +7,7 @@ from config import Config
 from resources.auth import *
 from resources.listings import *
 from resources.user import *
+import flask_cors
 
 # BUSSIN BUDDIES!
 def register_extensions(app):
@@ -31,6 +32,7 @@ def create_app():
 
 def register_resources(app):
     api = Api(app)
+    flask_cors.CORS(app)
 
     # Auth
     api.add_resource(LoginResource, "/api/users/login")  # Works

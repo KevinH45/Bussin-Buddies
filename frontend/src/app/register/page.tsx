@@ -6,6 +6,7 @@ import { useState } from 'react';
 import DDInput from '@/components/dropdown/DDInput';
 import { days, months, years } from '@/components/picker/dates';
 import VDate from "@/components/picker/Date";
+import Link from "next/link";
 
 type DDVal = {
   id: number;
@@ -51,7 +52,7 @@ export default function Register() {
         age: user_age,
       })
     console.log(info)
-    const response = fetch("localhost:3000/api/users", {
+    const response = fetch("localhost:5000/api/users", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -209,12 +210,12 @@ export default function Register() {
 
           <p className='text-center text-sm leading-6 text-gray-500'>
             Already a Member?{' '}
-            <a
-              href='#'
+            <Link
+              href='/login'
               className='font-semibold text-indigo-600 hover:text-indigo-500'
             >
               Login
-            </a>
+            </Link>
           </p>
         </div>
       </div>

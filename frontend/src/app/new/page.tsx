@@ -23,21 +23,39 @@ export default function Post() {
 
   const onSubmit = (e: any) => {
     e.preventDefault()
-    const info = JSON.stringify({ 
-        title: postTitle,
-        details: postDetails,
-        time: timeHour.name + ":" + timeMinute.name,
-        link: postLink,
-      })
+    // const info = JSON.stringify({
+    //     title: postTitle,
+    //     details: postDetails,
+    //     time: timeHour.name + ":" + timeMinute.name,
+    //     link: postLink,
+    //   })
+    const info =   {
+      id: 1,
+      title: 'Join Us Today',
+      description:
+        'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.',
+      date: 'Mar 16, 2020',
+      datetime: '2020-03-16',
+      imageUrl: "https://s3-media0.fl.yelpcdn.com/bphoto/55ytTjhnJ8ka0O4ccaV6aA/o.jpg",
+      author_descriptor: {
+        id: 1,
+        name: 'Michael Foster',
+        imageUrl:
+          'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      },
+    }
     console.log(info)
-    const response = fetch("/api/listings", {
+    const response = fetch("http://localhost:5000/api/listings", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
         },
         body: info,
+    }).then((e) => {
+      window.location = "http://localhost:3000/meetups"
     });
+
   }
 
   return (
