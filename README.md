@@ -1,6 +1,8 @@
 
 # Bussin' Buddies
 
+![Logo](https://github.com/KevinH45/QuHacks/blob/main/logo.png)
+
 An AI-powered social networking app for creating friends through restaurant meetups.
 
 ## API Reference
@@ -42,7 +44,7 @@ An AI-powered social networking app for creating friends through restaurant meet
 #### Logout
 
 ```http
-  GET /api/refresh
+  GET /refresh
   ```
   | Parameter  | Type      | Description                             |
 |------------|-----------|-----------------------------------------|
@@ -90,8 +92,6 @@ An AI-powered social networking app for creating friends through restaurant meet
 | `age`      | `int`     | **Required**. User's age.                |
 | `location` | `geo coord`| **Required**. Geographical coordinates representing the user's location.|
 | `username` | `string`  | **Required**. User's chosen username.    |
-
-![Logo](https://github.com/KevinH45/QuHacks/blob/main/logo.png)
 
 
 ## Run Locally

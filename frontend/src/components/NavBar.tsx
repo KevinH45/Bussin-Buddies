@@ -72,10 +72,10 @@ export default function NavBar({ selected }: {selected: Selected}) {
                     New Meetup
                   </Link> : null}
                   {selected == "SingleMeetup" ? <Link
-                    href="/single/111"
+                    href={"#"}
                     className={getSelectedClass("SingleMeetup")}
                   >
-                    New Meetup
+                    Single Meetup
                   </Link> : null}
                 </div>
               </div>

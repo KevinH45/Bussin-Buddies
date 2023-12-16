@@ -1,17 +1,21 @@
 import fasttext.util
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
+from transformers import BertTokenizer, BertModel
+import torch
 class Model:
     def __init__(self):
         pass
     def load_model(self):
-        fasttext.util.download_model('en', if_exists='ignore') 
-        ft = fasttext.load_model('cc.en.300.bin')
+        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+        self.model = BertModel.from_pretrained('bert-base-uncased')
 
     def embed_bio(self, bio: str):
-        ft = fasttext.load_model('cc.en.300.bin')
-        return ft.get_word_vector(bio)
-
+        tokens = self.tokenizer(bio, return_tensors='pt')
+        with torch.no_grad():
+            outputs = self.model(**tokens)
+        last_hidden_states = outputs.last_hidden_state
+        return last_hidden_states[0].sum(axis=0)/len(last_hidden_states[0])
 
 class KNN: 
     def __init__(self):

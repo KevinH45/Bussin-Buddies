@@ -14,7 +14,7 @@ export default function ComponentsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div>
+  return <div className="">
     <NavBar selected="Meetups"/>
     {children}
   </div>;
