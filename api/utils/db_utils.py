@@ -1,7 +1,7 @@
 import uuid
 from extensions import db
 from firebase_admin import firestore
-from ml import get_embedding
+from ml import Model
 from passlib.hash import pbkdf2_sha256
 
 
@@ -13,7 +13,7 @@ def create_user(data):
     userRef.set(data)
 
     embedRef = db.collection("user-embedding").document(id)
-    embedRef.set({"embedding": get_embedding(data["bio"])})
+    embedRef.set({"embedding": Model.embed_bio(data["bio"])})
 
     return id
 
@@ -68,7 +68,30 @@ def update_user(user_id, data):
     doc = db.collection("user").document(user_id)
     doc.update(data)
 
+    embedRef = db.collection("user-embedding").document(id)
+    embedRef.update({"embedding": Model.embed_bio(data["bio"])})
+
     return doc.get().to_dict(), doc
+
+def get_embed_map():
+    documents = db.collection("user-embedding").stream()
+    collection_dict = {}
+
+    # Iterate through the documents and add them to the dictionary
+    for doc in documents:
+        collection_dict[doc.id] = doc.to_dict()
+
+    return collection_dict
+
+def get_posts(post_ids):
+    posts = []
+    for id in post_ids:
+        doc = db.collection("user").document(id)
+        if not doc:
+            print("Doc recc not found?")
+            continue
+        posts.append(doc.get().to_dict())
+    return posts
 
 def hash_password(password):
     return pbkdf2_sha256.hash(password)
