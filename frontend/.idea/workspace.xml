@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fee488d8-e58c-406f-8ecc-41b0b3540875" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/meetups/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/meetups/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/meetups/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/meetups/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +39,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/vlad/Documents/code/hackathon/qhacks24/QuHacks/frontend/src/app",
+    "last_opened_file_path": "/home/vlad/Documents/code/hackathon/qhacks24/QuHacks/frontend/src/app/meetups/[slug]",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -52,11 +52,14 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/meetups/[slug]" />
       <recent name="$PROJECT_DIR$/src/app" />
       <recent name="$PROJECT_DIR$/src/components/picker" />
       <recent name="$PROJECT_DIR$/src/app/login" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/meetup" />
+      <recent name="$PROJECT_DIR$/src/app" />
       <recent name="$PROJECT_DIR$/src/components/picker" />
     </key>
   </component>
@@ -69,7 +72,7 @@
       <option name="presentableId" value="Default" />
       <updated>1702734172185</updated>
       <workItem from="1702734173795" duration="384000" />
-      <workItem from="1702736451051" duration="18870000" />
+      <workItem from="1702736451051" duration="20798000" />
     </task>
     <servers />
   </component>

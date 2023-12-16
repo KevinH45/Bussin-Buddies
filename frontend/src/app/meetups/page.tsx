@@ -53,6 +53,7 @@ const posts = [
 import Head from 'next/head';
 import * as React from 'react';
 import { useState } from 'react';
+import Link from "next/link";
 
 export default function Meetups() {
   return (
@@ -81,10 +82,10 @@ export default function Meetups() {
                   </div>
                   <div className="group relative">
                     <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                      <a href={"#"}>
+                      <Link href={`/meetup/${post.id}`}>
                         <span className="absolute inset-0" />
                         {post.title}
-                      </a>
+                      </Link>
                     </h3>
                     <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{post.description}</p>
                   </div>
@@ -92,10 +93,10 @@ export default function Meetups() {
                     <img src={post.author.imageUrl} alt="" className="h-10 w-10 rounded-full bg-gray-50" />
                     <div className="text-sm leading-6">
                       <p className="font-semibold text-gray-900">
-                        <a href={"#"}>
+                        <Link href={`/profile/${post.author.id}`}>
                           <span className="absolute inset-0" />
                           {post.author.name}
-                        </a>
+                        </Link>
                       </p>
                       {/*<p className="text-gray-600">{post.author.role}</p>*/}
                     </div>

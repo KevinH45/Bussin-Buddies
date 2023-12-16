@@ -2,11 +2,10 @@ import { Metadata } from 'next';
 import * as React from 'react';
 
 import '@/styles/colors.css';
-import NavBar from "@/components/NavBar";
 
 export const metadata: Metadata = {
-  title: 'Meetups',
-  description: 'Meetups',
+  title: 'Components',
+  description: 'Pre-built components with awesome default',
 };
 
 export default function ComponentsLayout({
@@ -14,8 +13,5 @@ export default function ComponentsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div>
-    <NavBar selected="Meetups"/>
-    {children}
-  </div>;
+  return <div className='content-center p-5'>{children}</div>;
 }
