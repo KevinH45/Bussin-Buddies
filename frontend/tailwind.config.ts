@@ -54,6 +54,5 @@ export default {
   },
   plugins: [
     require('@tailwindcss/forms'),
-    require('tw-elements/dist/plugin.cjs'),
   ],
 } satisfies Config;
