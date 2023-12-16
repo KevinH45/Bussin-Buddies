@@ -64,6 +64,12 @@ def create_listing(data):
     listing.set(data)
     return listing.get().to_dict()
 
+def update_user(user_id, data):
+    doc = db.collection("user").document(user_id)
+    doc.update(data)
+
+    return doc.get().to_dict(), doc
+
 def hash_password(password):
     return pbkdf2_sha256.hash(password)
 
