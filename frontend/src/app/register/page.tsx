@@ -2,27 +2,62 @@
 
 import Head from 'next/head';
 import * as React from 'react';
-import {useState} from "react";
-import DDInput from "@/components/dropdown/DDInput";
-import {days, months, years} from "@/app/register/dates";
+import { useState } from 'react';
+import DDInput from '@/components/dropdown/DDInput';
+import { days, months, years } from '@/components/picker/dates';
+import VDate from "@/components/picker/Date";
 
 type DDVal = {
-  id: number,
-  name: string
+  id: number;
+  name: string;
+};
+
+function calculateAge(birthYear: number, birthMonth: number, birthDay: number): number {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth() + 1; // JavaScript months are 0-11
+  const currentDay = currentDate.getDate();
+
+  let age = currentYear - birthYear;
+
+  if (currentMonth < birthMonth || (currentMonth === birthMonth && currentDay < birthDay)) {
+      age--;
+  }
+
+  return age;
 }
 
 export default function Register() {
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [user_email, setEmail] = useState<string>("");
+  const [user_password, setPassword] = useState<string>("");
   const [dateDay, setDateDay] = useState<DDVal>(days[0]);
   const [dateMonth, setDateMonth] = useState<DDVal>(months[0]);
   const [dateYear, setDateYear] = useState<DDVal>(years[0]);
 
   const onSubmit = (e: any) => {
     e.preventDefault()
-    console.log(firstName, lastName, email, password, dateDay, dateMonth, dateYear)
+    const user_age = calculateAge(dateYear.id + 1949, dateMonth.id, dateDay.id)
+    console.log(firstName, lastName, user_email, user_password, user_age)
+    const info = JSON.stringify({ 
+        first_name: firstName,
+        last_name: lastName,
+        bio: "",
+        email: user_email,
+        password: user_password,
+        cuisine: "",
+        location: "",
+        age: user_age,
+      })
+    console.log(info)
+    const response = fetch("localhost:3000/api/users", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: info,
+    });
   }
 
   return (
@@ -44,7 +79,7 @@ export default function Register() {
           </div>
           <form className='space-y-6' action='#' method='POST'>
             <div className='relative -space-y-px rounded-md shadow-sm'>
-              <div className='pointer-events-none absolute inset-0 z-10 rounded-md ring-1 ring-inset ring-gray-300'/>
+              <div className='pointer-events-none absolute inset-0 z-10 rounded-md ring-1 ring-inset ring-gray-300' />
               <div className='flex flex-row'>
                 <div>
                   <label htmlFor='first-name' className='sr-only'>
@@ -91,7 +126,7 @@ export default function Register() {
                   required
                   className='relative block w-full border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
                   placeholder='Email address'
-                  value={email}
+                  value={user_email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
@@ -121,16 +156,16 @@ export default function Register() {
                   required
                   className='relative block w-full border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
                   placeholder='Password'
-                  value={password}
+                  value={user_password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <div className="flex flex-col">
-                <p className="border-0 text-gray-700 sm:text-sm sm:leading-6 pl-1.5">Birth Day</p>
+              <div className='flex flex-col'>
+                <p className='border-0 pl-1.5 text-gray-700 sm:text-sm sm:leading-6'>
+                  Birth Day
+                </p>
                 <div className='flex flex-row rounded-b-md'>
-                  <DDInput data={days} selected={dateDay} setSelected={setDateDay}/>
-                  <DDInput data={months} selected={dateMonth} setSelected={setDateMonth}/>
-                  <DDInput data={years} selected={dateYear} setSelected={setDateYear}/>
+                  <VDate dateDay={dateDay} dateMonth={dateMonth} dateYear={dateYear} setDateDay={setDateDay} setDateMonth={setDateMonth} setDateYear={setDateYear}/>
                 </div>
               </div>
             </div>
@@ -178,7 +213,7 @@ export default function Register() {
               href='#'
               className='font-semibold text-indigo-600 hover:text-indigo-500'
             >
-            Login CHANGEMENEXTLINK
+              Login CHANGEMENEXTLINK
             </a>
           </p>
         </div>

@@ -2,15 +2,41 @@
 
 import Head from 'next/head';
 import * as React from 'react';
-import {useState} from "react";
+import { useState } from 'react';
+
+function calculateAge(birthYear: number, birthMonth: number, birthDay: number): number {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth() + 1; // JavaScript months are 0-11
+  const currentDay = currentDate.getDate();
+
+  let age = currentYear - birthYear;
+
+  if (currentMonth < birthMonth || (currentMonth === birthMonth && currentDay < birthDay)) {
+      age--;
+  }
+
+  return age;
+}
 
 export default function Login() {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [user_email, setEmail] = useState<string>("");
+  const [user_password, setPassword] = useState<string>("");
 
   const onSubmit = (e: any) => {
     e.preventDefault()
-    console.log(email, password)
+    const info = JSON.stringify({ 
+        email: user_email,
+        password: user_password,
+      })
+    console.log(info)
+    const response = fetch("localhost:3000/api/users/login", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: info,
+    });
   }
 
   return (
@@ -45,7 +71,7 @@ export default function Login() {
                   required
                   className='relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
                   placeholder='Email address'
-                  value={email}
+                  value={user_email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
@@ -61,7 +87,7 @@ export default function Login() {
                   required
                   className='relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
                   placeholder='Password'
-                  value={password}
+                  value={user_password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
