@@ -5,6 +5,13 @@
 
 An AI-powered social networking app for creating friends through restaurant meetups.
 
+## App Description
+
+Users can create accounts using their email, password, location, and a quick description of themselves. 
+
+Then, they can view custom-recommended meetups (based on our LLM powered recommendation engine) and join a meetup that they want to go to!
+
+
 ## API Reference
 
 #### Create a user
