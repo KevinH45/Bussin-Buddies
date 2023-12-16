@@ -1,5 +1,5 @@
 import DDInput from '@/components/dropdown/DDInput';
-import {hours, minutes} from "@/components/picker/time";
+import {hours, minutes} from "@/components/picker/times";
 import * as React from 'react';
 
 export type DDVal = {
@@ -7,7 +7,7 @@ export type DDVal = {
   name: string;
 };
 
-const Date = ({
+const Time = ({
   timeHour,
   timeMinute,
   setTimeHour,
@@ -26,4 +26,4 @@ const Date = ({
   );
 };
 
-export default Date;
+export default Time;

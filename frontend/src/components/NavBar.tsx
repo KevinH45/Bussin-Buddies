@@ -56,7 +56,7 @@ export default function NavBar({ selected }: {selected: Selected}) {
                 <div className="hidden md:ml-6 md:flex md:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   <Link
-                    href="#"
+                    href="/meetups"
                     className={getSelectedClass("Meetups")}
                   >
                     Meetups

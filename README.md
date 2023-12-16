@@ -1,46 +1,122 @@
 
-## 💡 Inspiration 💡
+# Bussin' Buddies
+
+An AI-powered social networking app for creating friends through restaurant meetups.
+
+## API Reference
+
+#### Create a user
+
+```http
+  POST /create-user
+```
+| Parameter  | Type      | Description                             |
+|------------|-----------|-----------------------------------------|
+| `bio`      | `string`  | **Required**. User's short biography.   |
+| `age`      | `int`     | **Required**. User's age.                |
+| `location` | `geo coord`| **Required**. Geographical coordinates representing the user's location.|
+| `email`    | `string`  | **Required**. User's email address.      |
+| `username` | `string`  | **Required**. User's chosen username.    |
+| `password` | `string`  | **Required**. User's chosen password.    |
 
 
-## ⚙️ What it does ⚙️
-Bussin Buddies is a social media app designed to connect people through shared dining experiences. Whether you're looking to expand your professional network or make new friends, our app makes it easy and safe to meet new people at local restaurants.
+#### Login
 
-## 🛠️ How we built it 🛠️
-The back-end API was mainly built using [Flask](https://flask.palletsprojects.com/en/2.2.x/) and [Flask-Restful](https://flask-restful.readthedocs.io/en/latest/). In order to conduct authentication and authorization, we used [Flask-JWT-Extended](https://pypi.org/project/Flask-JWT-Extended/). To store our data, we used Firebase’s [Cloud Firestore](https://firebase.google.com/docs/firestore/). 
+```http
+  POST /login
+  ```
+  | Parameter  | Type      | Description                             |
+|------------|-----------|-----------------------------------------|
+| `username` | `string`  | **Required**. User's username.           |
+| `password` | `string`  | **Required**. User's password.           |
 
-To recommend listings to particular users, we used a NER-based approach (with [spacy](https://spacy.io/) and [skillNER](https://pypi.org/project/skillNer/)). We first extracted relevant information (using a pre-trained SVM and n-gram scoring), like the skills, and we attached those as “tags” to the listing. Then, we used a Firestore query to match this information (skills and location) to particular users (and recommend it to them).
+#### Login
 
-The front end was built using [Next.js](https://nextjs.org/) and [SCSS](https://sass-lang.com/documentation/). We used [Figma](https://www.figma.com/) to draw up the designs for the pages and the logo.
+```http
+  POST /refresh
+  ```
+  | Parameter  | Type      | Description                             |
+|------------|-----------|-----------------------------------------|
+| `jwt_refresh` | `string`  | **Required**. Refresh token|
 
-## 😣 Challenges we ran into 😣
+#### Logout
 
-We faced a multitude of problems with the back end. We struggled with implementing a recommendation engine with good results. We tried to use an approach using an LSTM and word embeddings, but it did not end up with good recommendations, and we had to scrap it. We eventually decided to use named entity recognition to extract job skills, which was perfect for our use case. When integrating with our API, this approach also had a host of issues (weird dependencies and slow runtime).
+```http
+  GET /api/refresh
+  ```
+  | Parameter  | Type      | Description                             |
+|------------|-----------|-----------------------------------------|
+| `jwt_access_token` | `string`  | **Required**. Refresh token|
 
-We also struggled with Cloud Firestore, as none of us had used it before. We had to completely rewrite portions of our code multiple times due to bugs using it. Nevertheless, we feel that it was the right choice to use Firestore, as its syntax became very intuitive after a few hours of using it.
+#### Get listings
 
-For the front end, it was a challenge to implement good design practices and nail all the transitions (specifically between sign-in and sign-up). 
+```http
+  GET /listings
+  ```
+| Parameter               | Type      | Description                                      |
+|-------------------------|-----------|--------------------------------------------------|
+| `jwt_access_token`      | `string`  | **Required**. JSON Web Token for user validation.|
+| `location_filter_on`    | `boolean` | Enable/disable location-based filtering.         |
+| `cuisine_filter_on`     | `boolean` | Enable/disable cuisine-based filtering.          |
+
+#### Create a new listing
+
+```http
+  POST /listings
+  ```
+| Parameter          | Type      | Description                                  |
+|--------------------|-----------|----------------------------------------------|
+| `jwt_access_token` | `string`  | **Required**. JSON Web Token for user validation.|
+| `rest_link`        | `string`  | **Required**. Link to the restaurant's website.|
+| `time`             | `datetime`| **Required**. Date and time of the listing.   |
+| `image_link`       | `string`  | Link to an image associated with the listing. |
+
+#### Join a meetup listing
+```http
+  POST /listings/{list-id}
+  ```
+| Parameter          | Type      | Description                                  |
+|--------------------|-----------|----------------------------------------------|
+| `jwt_access_token` | `string`  | **Required**. JSON Web Token for user validation.|
+
+#### Retrieve user info
+
+```http
+  GET /user/{user-id}
+```
+| Parameter  | Type      | Description                             |
+|------------|-----------|-----------------------------------------|
+| `bio`      | `string`  | **Required**. User's short biography.   |
+| `age`      | `int`     | **Required**. User's age.                |
+| `location` | `geo coord`| **Required**. Geographical coordinates representing the user's location.|
+| `username` | `string`  | **Required**. User's chosen username.    |
+
+![Logo](https://github.com/KevinH45/QuHacks/blob/main/logo.png)
 
 
-## 🎉 Accomplishments that we're proud of 🎉
-- The high speed and accuracy of our recommendation engine.
-- The seamless connection between our API and front end.
-- Picking up Firestore on the fly.
-- Writing only a *little* bit of spaghetti code :)
+## Run Locally
 
-## 📚 What we learned 📚
-In a short timeframe, we learned an unbelievable amount. On the back end side, we learned how to use Cloud Firestore and we learned how to integrate with a deployed NLP model. We also learned how to connect with the front end seamlessly. 
+Clone the project
 
-In general, we all learned how to work productively as a team, utilizing Git, GitHub, and traditional skills like time management, to deliver (what we believe) a great end result!
+```bash
+  git clone https://github.com/KevinH45/QuHacks.git
+```
 
-## ⏭️ What's next for Handshake ⏭️
+Go to the project directory
 
-On the feature side, we hope to implement an even more accurate recommendation engine, by using Geoqueries instead of the address-like system we have now. We want to increase the speed of our engine as well.
+```bash
+  cd my-project
+```
 
-We also hope to spread the word about our app and gain more users, as we truly believe that Handshake can have an indispensable impact on society.  
+Install dependencies
 
-## ✨ Extra Info ✨
-- [Pitch Deck](https://docs.google.com/presentation/d/1dlZHL-5UPxA2J_5Yd7FE4cFG-z8TEM68bYRJw1kouMw/edit?usp=sharing)
-- [Full Credit List](https://docs.google.com/document/d/1dqVXpI-KUFIOwluv2J1LO_LgvIgrXUi8bDU1N8Was3Q/edit?usp=sharing)
-- [Full Feature List](https://docs.google.com/document/d/19p4y8Nsll0O-gwci4prTuiefic2yIR5ETKkm5LSTIRE/edit?usp=sharing)
-- [MLH Video Submission](https://www.youtube.com/watch?v=IPCKk63c23o)
-- [Full Unedited Video](https://www.youtube.com/watch?v=eBKVW3s_1hg)
+```bash
+  yarn install
+  pip install -r api/requirements.txt
+```
+
+Start the server
+
+```bash
+  yarn run start
+```

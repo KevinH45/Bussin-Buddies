@@ -4,12 +4,16 @@ import { PhotoIcon } from '@heroicons/react/24/solid';
 import { useState } from "react";
 import { days, months, years } from "@/components/picker/dates";
 import Date, { DDVal } from "@/components/picker/Date";
+import { minutes, hours } from "@/components/picker/times"
+import Time from "@/components/picker/Time";
 import * as React from "react";
 
 export default function Post() {
   const [dateDay, setDateDay] = useState<DDVal>(days[0]);
   const [dateMonth, setDateMonth] = useState<DDVal>(months[0]);
   const [dateYear, setDateYear] = useState<DDVal>(years[0]);
+  const [timeHour, setTimeHour] = useState<DDVal>(hours[0]);
+  const [timeMinute, setTimeMinute] = useState<DDVal>(minutes[0]);
   const [attenceCap, setAttendance] = useState<number>();
   const [postTitle, setTitle] = useState<string>();
   const [postRestaurant, setRestaurant] = useState<string>();
@@ -19,6 +23,21 @@ export default function Post() {
 
   const onSubmit = (e: any) => {
     e.preventDefault()
+    const info = JSON.stringify({ 
+        title: postTitle,
+        details: postDetails,
+        time: timeHour.name + ":" + timeMinute.name,
+        link: postLink,
+      })
+    console.log(info)
+    const response = fetch("/api/listings", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+        },
+        body: info,
+    });
   }
 
   return (
@@ -181,6 +200,11 @@ export default function Post() {
                 <div className=''>Date</div>
                 <Date dateDay={dateDay} dateMonth={dateMonth} dateYear={dateYear} setDateDay={setDateDay}
                   setDateMonth={setDateMonth} setDateYear={setDateYear} />
+              </div>
+
+              <div className="col-span-2 col-start-4">
+                <div className=''>Time</div>
+                <Time timeHour={timeHour} setTimeHour={setTimeHour} timeMinute={timeMinute} setTimeMinute={setTimeMinute}/>
               </div>
 
               {/* TODO: time */}
