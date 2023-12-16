@@ -1,2 +1,2 @@
-for i in range(1950, 2025):
-    print("{" +  f'id: {i-1949}, year: "{i}"' + "},")
+for i in range(1, 60):
+    print("{" +  f'id: {i-1949}, hour: "{i}"' + "},")

@@ -45,8 +45,6 @@ def register_resources(app):
     api.add_resource(ListingSingleResource, "/api/listings/<id>")
     api.add_resource(ListingMultipleResource, "/api/listings")
 
-
-
 if __name__ == '__main__':
     app = create_app()
     app.run()
