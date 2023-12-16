@@ -4,5 +4,9 @@ flask
 firebase-admin
 numpy
 flask_mail
+transformers
+torch
+flask_mail
 fasttext-wheel
+fasttext
 scikit-learn
