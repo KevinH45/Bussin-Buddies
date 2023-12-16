@@ -4,8 +4,8 @@ import * as React from 'react';
 import '@/styles/colors.css';
 
 export const metadata: Metadata = {
-  title: 'Components',
-  description: 'Pre-built components with awesome default',
+  title: 'Register',
+  description: 'Register',
 };
 
 export default function ComponentsLayout({
@@ -13,5 +13,5 @@ export default function ComponentsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className='content-center p-5'>{children}</div>;
+  return <>{children}</>;
 }
