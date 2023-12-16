@@ -1,2 +1,2 @@
-for i in range(1, 60):
-    print("{" +  f'id: {i-1949}, hour: "{i}"' + "},")
+for i in range(0, 24):
+    print("{" +  f'id: {i}, hour: "{i}"' + "},")
