@@ -1,7 +1,7 @@
 from flask_jwt_extended import JWTManager
 import firebase_admin
 from firebase_admin import firestore
-
+from flask_mail import Mail
 
 jwt = JWTManager()
 
@@ -13,3 +13,4 @@ except ValueError:
     pass
 
 db = firestore.client()
+mail = Mail()

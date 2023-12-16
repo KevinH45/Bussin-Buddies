@@ -31,5 +31,4 @@ class ListingMultipleResource(Resource):
         data = request.get_json()
         data["author"] = user_id
         data["people"] = [data["author"], ]
-
         return create_listing(data), HTTPStatus.CREATED
