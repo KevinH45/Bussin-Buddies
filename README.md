@@ -11,6 +11,9 @@ Users can create accounts using their email, password, location, and a quick des
 
 Then, they can view custom-recommended meetups (based on our LLM powered recommendation engine) and join a meetup that they want to go to!
 
+## Recommendation Engine
+
+![ML-Model](https://github.com/KevinH45/QuHacks/blob/main/ml_model.png)
 
 ## API Reference
 
