@@ -12,28 +12,31 @@ class Model:
         ft = fasttext.load_model('cc.en.300.bin')
         return ft.get_word_vector(bio)
 
+
 class KNN: 
     def __init__(self):
-        m = Model()
-        m.load_model()
+        self.m = Model()
+        self.m.load_model()
 
     def rank_users(self, uids, embeddings, user_embedding):
-        model = NearestNeighbors(n_neighbors=10,
+        neighbors = min(len(embeddings), 10)
+        model = NearestNeighbors(n_neighbors=neighbors,
                          metric='cosine',
                          algorithm='brute',
                          n_jobs=-1)
 
         model.fit(np.array(embeddings))
-        res = (model.kneighbors(np.array(user_embedding).reshape(1, -1), 10))
+        res = (model.kneighbors(np.array(user_embedding).reshape(1, -1), neighbors))
         return [uids[x] for x in list(res[1][0])]
 
     def recommend(self, user_embedding, embed_map, posts):
         # Maps post_id to list of people
-        users = self.rank_users(embed_map.keys(), embed_map.values(), user_embedding)
+        users = self.rank_users(list(embed_map.keys()), list(embed_map.values()), user_embedding)
         avgs = {}
         for post_id, people in posts.items():
             total = 0
             for u in people:
-                total += people.index(u)
+                total += users.index(u)
             avgs[post_id] =  total/len(people)
+        #print(sorted(avgs.keys(), key=lambda x: avgs[x])[:10])
         return sorted(avgs.keys(), key=lambda x: avgs[x])[:10]

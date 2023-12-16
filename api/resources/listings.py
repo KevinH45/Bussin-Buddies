@@ -4,7 +4,8 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_restful import Resource
 
 from extensions import rec_engine
-from utils.db_utils import add_user_to_listing, get_listing_by_id, create_listing, get_embed_map
+from utils.db_utils import add_user_to_listing, get_listing_by_id, create_listing, get_embed_map, get_posts, \
+    get_post_map
 from flask import request
 
 class ListingSingleResource(Resource):
@@ -28,7 +29,7 @@ class ListingMultipleResource(Resource):
         uid = get_jwt_identity()
         embed_map = get_embed_map()
         user_embedding = embed_map[uid]
-        post_ids = rec_engine.recommend(user_embedding, embed_map)
+        post_ids = rec_engine.recommend(user_embedding, embed_map, get_post_map())
 
         return get_posts(post_ids)
 

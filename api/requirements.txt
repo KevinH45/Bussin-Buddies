@@ -3,6 +3,6 @@ numpy
 flask
 firebase-admin
 numpy
-transformers
-torch
 flask_mail
+fasttext-wheel
+scikit-learn

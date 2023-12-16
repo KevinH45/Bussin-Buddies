@@ -1,7 +1,6 @@
 import uuid
-from extensions import db
+from extensions import db, rec_engine
 from firebase_admin import firestore
-from ml import Model
 from passlib.hash import pbkdf2_sha256
 
 
@@ -13,7 +12,7 @@ def create_user(data):
     userRef.set(data)
 
     embedRef = db.collection("user-embedding").document(id)
-    embedRef.set({"embedding": Model.embed_bio(data["bio"])})
+    embedRef.set({"embedding": rec_engine.m.embed_bio(data["bio"]).tolist()})
 
     return id
 
@@ -69,7 +68,7 @@ def update_user(user_id, data):
     doc.update(data)
 
     embedRef = db.collection("user-embedding").document(id)
-    embedRef.update({"embedding": Model.embed_bio(data["bio"])})
+    embedRef.update({"embedding": rec_engine.m.embed_bio(data["bio"]).tolist()})
 
     return doc.get().to_dict(), doc
 
@@ -79,19 +78,32 @@ def get_embed_map():
 
     # Iterate through the documents and add them to the dictionary
     for doc in documents:
-        collection_dict[doc.id] = doc.to_dict()
+        collection_dict[doc.id] = doc.to_dict()["embedding"]
 
     return collection_dict
 
 def get_posts(post_ids):
+    #print(post_ids)
     posts = []
     for id in post_ids:
-        doc = db.collection("user").document(id)
+        doc = db.collection("listing").document(id)
+        #print(doc.get())
         if not doc:
-            print("Doc recc not found?")
+            #print("Doc recc not found?")
             continue
         posts.append(doc.get().to_dict())
+    #print(posts)
     return posts
+
+def get_post_map():
+    documents = db.collection("listing").stream()
+    collection_dict = {}
+
+    # Iterate through the documents and add them to the dictionary
+    for doc in documents:
+        #print(doc.to_dict())
+        collection_dict[doc.id] = doc.to_dict()["people"]
+    return collection_dict
 
 def hash_password(password):
     return pbkdf2_sha256.hash(password)
