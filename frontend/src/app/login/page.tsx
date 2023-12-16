@@ -30,12 +30,18 @@ export default function Login() {
         password: user_password,
       })
     console.log(info)
-    const response = fetch("localhost:3000/api/users/login", {
+    fetch("localhost:3000/api/users/login", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: info,
+    }).then((resp) => {
+      return resp.json();
+    }).then((e) => {
+      localStorage.setItem('accessToken', e.accessToken);
+      localStorage.setItem('refreshToken', e.refreshToken);
+      localStorage.setItem('userId', e.userId);
     });
   }
 

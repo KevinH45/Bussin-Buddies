@@ -5,15 +5,19 @@ import { useState, useEffect} from "react";
 import { days, months, years } from "@/components/picker/dates";
 import Date, { DDVal } from "@/components/picker/Date";
 import * as React from "react";
+import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 
 export default function Post() {
   const [firstName, setFirstName] = useState<string>("First");
   const [lastName, setLastName] = useState<string>("Last");
   const [userBio, setBio] = useState<string>("...");
-  const id = 1
+  const badSlug = usePathname();
+  const slug = badSlug.split("/")[badSlug.split("/").length - 1]
+  console.log(slug)
 
   useEffect(() => {
-    fetch("/api/users/" + id)
+    fetch("/api/users/" + slug)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -79,6 +83,9 @@ export default function Post() {
                   htmlFor='title'
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
+                  <p>
+                    {slug}
+                  </p>
                   <p>
                    {userBio}
                   </p>
