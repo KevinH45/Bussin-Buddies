@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fee488d8-e58c-406f-8ecc-41b0b3540875" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../api/ml.py" beforeDir="false" afterPath="$PROJECT_DIR$/../api/ml.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../api/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/meetup/[slug]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/meetup/[slug]/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/meetup/[slug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/meetup/[slug]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/meetups/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/meetups/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/profile/[slug]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/[slug]/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/profile/[slug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/[slug]/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavBar.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

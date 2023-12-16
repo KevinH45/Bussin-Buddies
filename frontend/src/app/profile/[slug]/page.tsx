@@ -54,7 +54,7 @@ export default function Post() {
     <div className='items-center p-5'>
       <form>
         <div className='space-y-12'>
-          <div className='border-b border-gray-900/10 pb-12'>
+          <div className='pb-12'>
             <div className='mt-10 grid grid-cols-9 gap-x-6 gap-y-8'>
               <div className='col-span-3 col-start-4'>
                 {/*<label*/}
