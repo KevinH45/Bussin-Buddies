@@ -4,7 +4,7 @@ from http import HTTPStatus
 from flask import request
 from utils.db_utils import (email_exists, get_user_from_id, create_user, get_listings_by_user, hash_password,
                             update_user)
-
+from extensions import rec_engine
 class UserViewResource(Resource):
 
     def get(self, id):

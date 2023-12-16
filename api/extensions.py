@@ -2,6 +2,7 @@ from flask_jwt_extended import JWTManager
 import firebase_admin
 from firebase_admin import firestore
 from flask_mail import Mail
+from ml import KNN
 
 jwt = JWTManager()
 
@@ -14,3 +15,4 @@ except ValueError:
 
 db = firestore.client()
 mail = Mail()
+rec_engine = KNN()

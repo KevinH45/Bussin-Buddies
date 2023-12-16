@@ -73,6 +73,26 @@ def update_user(user_id, data):
 
     return doc.get().to_dict(), doc
 
+def get_embed_map():
+    documents = db.collection("user-embedding").stream()
+    collection_dict = {}
+
+    # Iterate through the documents and add them to the dictionary
+    for doc in documents:
+        collection_dict[doc.id] = doc.to_dict()
+
+    return collection_dict
+
+def get_posts(post_ids):
+    posts = []
+    for id in post_ids:
+        doc = db.collection("user").document(id)
+        if not doc:
+            print("Doc recc not found?")
+            continue
+        posts.append(doc.get().to_dict())
+    return posts
+
 def hash_password(password):
     return pbkdf2_sha256.hash(password)
 

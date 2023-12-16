@@ -16,6 +16,7 @@ class KNN:
     def __init__(self):
         m = Model()
         m.load_model()
+
     def rank_users(self, uids, embeddings, user_embedding):
         model = NearestNeighbors(n_neighbors=10,
                          metric='cosine',
