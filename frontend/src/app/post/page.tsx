@@ -19,17 +19,16 @@ export default function Post() {
   const onSubmit = (e: any) => {
     e.preventDefault()
     const info = JSON.stringify({
-      // email: user_email,
-      // password: user_password,
+      
     })
     console.log(postTitle, postRestaurant, postLink, postDetails, attenceCap)
-    // const response = fetch("localhost:3000/api/users/login", {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: info,
-    // });
+    const response = fetch("localhost:3000/api/listings", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: info,
+    });
   }
 
   return (
@@ -198,7 +197,7 @@ export default function Post() {
 
               <div className='col-span-2 col-start-5 content-end px-0'>
                 <button
-                  className='float-right rounded-full bg-green-500 px-4 py-2 text-sm font-bold text-gray-600 text-white hover:bg-blue-700'
+                  className='float-right rounded-full bg-green-500 px-4 py-2 text-sm font-bold text-gray-600 text-white hover:bg-green-700'
                   type='submit'
                   onClick={(e) => onSubmit(e)}
                 >
