@@ -44,7 +44,7 @@ An AI-powered social networking app for creating friends through restaurant meet
 #### Logout
 
 ```http
-  GET /api/refresh
+  GET /refresh
   ```
   | Parameter  | Type      | Description                             |
 |------------|-----------|-----------------------------------------|
