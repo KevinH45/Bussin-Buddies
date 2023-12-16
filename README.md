@@ -91,7 +91,7 @@ An AI-powered social networking app for creating friends through restaurant meet
 | `location` | `geo coord`| **Required**. Geographical coordinates representing the user's location.|
 | `username` | `string`  | **Required**. User's chosen username.    |
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+![Logo](https://github.com/KevinH45/QuHacks/blob/main/logo.png)
 
 
 ## Run Locally
