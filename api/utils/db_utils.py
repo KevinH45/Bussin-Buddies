@@ -18,27 +18,29 @@ def create_user(data):
     return id
 
 def email_exists(email):
-    doc = db.collection("users").where("email", "==", email).get()
+    doc = db.collection("user").where("email", "==", email).get()
     return bool(doc)
 
 def get_user_from_id(id):
-    doc = db.collection("users").document(id)
+    doc = db.collection("user").document(id)
     if not doc:
         return None, None
     return doc.get().to_dict(), doc
 
-def get_user_from_username(username):
-    doc = db.collection("users").where("username", "==", username).get()
+def get_user_from_email(email):
+    doc = db.collection("user").where("email", "==", email).get()
     if not doc:
         return None, None
-    return doc.get().to_dict(), doc
+    return doc[0].to_dict(), doc[0]
 
 def get_listings_by_user(id):
     doc = db.collection("listing").where("author", "==", id).get()
-    return doc.get().to_dict(), doc
+    if not doc:
+        return None, None
+    return doc[0].to_dict(), doc[0]
 
 def add_user_to_listing(user_id, listing_id):
-    doc = db.collections("listing").document(listing_id)
+    doc = db.collection("listing").document(listing_id)
 
     data = doc.get().to_dict()
 
@@ -52,7 +54,7 @@ def add_user_to_listing(user_id, listing_id):
     return True
 
 def get_listing_by_id(listing_id):
-    doc = db.collections("listings").document(listing_id)
+    doc = db.collection("listing").document(listing_id)
     return doc.get().to_dict(), doc
 
 def create_listing(data):

@@ -8,6 +8,7 @@ from resources.auth import *
 from resources.listings import *
 from resources.user import *
 
+# BUSSIN BUDDIES!
 def register_extensions(app):
     CORS(app)
     jwt.init_app(app)
@@ -32,14 +33,14 @@ def register_resources(app):
     api = Api(app)
 
     # Auth
-    api.add_resource(LoginResource, "/api/users/login")
-    api.add_resource(LogoutResource, "/api/users/logout")
-    api.add_resource(RefreshResource, "/api/users/refresh")
+    api.add_resource(LoginResource, "/api/users/login")  # Works
+    api.add_resource(LogoutResource, "/api/users/logout")  # Works
+    api.add_resource(RefreshResource, "/api/users/refresh")  # Works
 
     # User Resources
-    api.add_resource(UserViewResource, "/api/users/<id>")
-    api.add_resource(UserListingsResource, "/api/users/<id>/listings")
-    api.add_resource(UserCreationResource, "/api/users")
+    api.add_resource(UserViewResource, "/api/users/<id>")  # Works
+    api.add_resource(UserListingsResource, "/api/users/<id>/listings")  # Works
+    api.add_resource(UserCreationResource, "/api/users")  # Works
 
     # Listing Resources
     api.add_resource(ListingSingleResource, "/api/listings/<id>")
