@@ -2,7 +2,7 @@
 
 import Head from 'next/head';
 import * as React from 'react';
-import {useState} from "react";
+import { useState } from 'react';
 
 function calculateAge(birthYear: number, birthMonth: number, birthDay: number): number {
   const currentDate = new Date();

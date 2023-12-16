@@ -2,14 +2,15 @@
 
 import Head from 'next/head';
 import * as React from 'react';
-import {useState} from "react";
-import DDInput from "@/components/dropdown/DDInput";
-import {days, months, years} from "@/app/register/dates";
+import { useState } from 'react';
+import DDInput from '@/components/dropdown/DDInput';
+import { days, months, years } from '@/components/picker/dates';
+import VDate from "@/components/picker/Date";
 
 type DDVal = {
-  id: number,
-  name: string
-}
+  id: number;
+  name: string;
+};
 
 function calculateAge(birthYear: number, birthMonth: number, birthDay: number): number {
   const currentDate = new Date();
@@ -78,7 +79,7 @@ export default function Register() {
           </div>
           <form className='space-y-6' action='#' method='POST'>
             <div className='relative -space-y-px rounded-md shadow-sm'>
-              <div className='pointer-events-none absolute inset-0 z-10 rounded-md ring-1 ring-inset ring-gray-300'/>
+              <div className='pointer-events-none absolute inset-0 z-10 rounded-md ring-1 ring-inset ring-gray-300' />
               <div className='flex flex-row'>
                 <div>
                   <label htmlFor='first-name' className='sr-only'>
@@ -159,12 +160,12 @@ export default function Register() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <div className="flex flex-col">
-                <p className="border-0 text-gray-700 sm:text-sm sm:leading-6 pl-1.5">Birth Day</p>
+              <div className='flex flex-col'>
+                <p className='border-0 pl-1.5 text-gray-700 sm:text-sm sm:leading-6'>
+                  Birth Day
+                </p>
                 <div className='flex flex-row rounded-b-md'>
-                  <DDInput data={days} selected={dateDay} setSelected={setDateDay}/>
-                  <DDInput data={months} selected={dateMonth} setSelected={setDateMonth}/>
-                  <DDInput data={years} selected={dateYear} setSelected={setDateYear}/>
+                  <VDate dateDay={dateDay} dateMonth={dateMonth} dateYear={dateYear} setDateDay={setDateDay} setDateMonth={setDateMonth} setDateYear={setDateYear}/>
                 </div>
               </div>
             </div>
@@ -212,7 +213,7 @@ export default function Register() {
               href='#'
               className='font-semibold text-indigo-600 hover:text-indigo-500'
             >
-            Login CHANGEMENEXTLINK
+              Login CHANGEMENEXTLINK
             </a>
           </p>
         </div>
